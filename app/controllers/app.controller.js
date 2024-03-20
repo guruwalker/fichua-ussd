@@ -2,12 +2,9 @@
 /* eslint-disable no-console */
 const { menu } = require('../config/menu-builder');
 
-const EmergencyResponseController = require('./emergency-response/emergency.controller');
-const HealthCareFacilitiesController = require('./healthcare-facilities/facilities.controller');
-const SpecializedCareFacilitiesController = require('./specialized-clinics/specialists.controller');
-const MedicineSearchController = require('./medicine-search/medicine.controller');
-const ReferralsController = require('./personalized-referrals/referrals.controller');
-const SettingsController = require('./settings/settings.controller');
+const AuthenticationController = require('./authentication/authentication.controller');
+const ReportController = require('./report/report.controller');
+const AboutController = require('./about/about.controller');
 
 module.exports = async function AppController(req, res) {
   try {
@@ -24,12 +21,10 @@ module.exports = async function AppController(req, res) {
            *  First screen
            * ---------------------------------------
           ------------------------------------------------------* */
-          menu.con('AfriCareLink helps you find healthcare services near you!\n'
-              + '\n1. Emergency response'
-              + '\n2. Healthcare Facility Locator'
-              + '\n3. Specialized Clinics'
-              + '\n4. Personalized Referrals'
-              + '\n5. Medicine Search');
+          menu.con('Welcome to Fichua!\n'
+              + '\n1. Login to report'
+              + '\n2. Report anonymously'
+              + '\n3. About Fichua');
         } catch (error) {
           console.error(error);
         }
@@ -40,78 +35,42 @@ module.exports = async function AppController(req, res) {
      * ---------------------------------------
      ------------------------------------------------------* */
       next: {
-        1: 'entry-point-to-emergency-controller',
-        2: 'entry-point-to-healthcare-facilities-controller',
-        3: 'entry-point-to-specialized-care-controller',
-        4: 'entry-point-to-referrals-controller',
-        5: 'entry-point-to-medicine-search-controller',
-        6: 'entry-point-to-settings-controller',
+        1: 'entry-point-to-authentication-controller',
+        2: 'entry-point-to-report-controller',
+        3: 'entry-point-to-about-controller',
       },
     });
 
     /** ------------------------------------------------------
      *  ---------------------------------------
-     *  Emergency response  controller
+     *  Authentication  controller
      * ---------------------------------------
      ------------------------------------------------------* */
-    menu.state('entry-point-to-emergency-controller', {
+    menu.state('entry-point-to-authentication-controller', {
       run() {
-        EmergencyResponseController(req, res);
+        AuthenticationController(req, res);
       },
     });
 
     /** ------------------------------------------------------
      *  ---------------------------------------
-     *  Healthcare facility locator controller
+     *  Report controller
      * ---------------------------------------
      ------------------------------------------------------* */
-    menu.state('entry-point-to-healthcare-facilities-controller', {
+    menu.state('entry-point-to-report-controller', {
       run() {
-        HealthCareFacilitiesController(req, res);
+        ReportController(req, res);
       },
     });
 
     /** ------------------------------------------------------
      *  ---------------------------------------
-     *  Specialized clinics controller
+     *  About controller
      * ---------------------------------------
      ------------------------------------------------------* */
-    menu.state('entry-point-to-specialized-care-controller', {
+    menu.state('entry-point-to-about-controller', {
       run() {
-        SpecializedCareFacilitiesController(req, res);
-      },
-    });
-
-    /** ------------------------------------------------------
-     *  ---------------------------------------
-     *  Personalized referrals controller
-     * ---------------------------------------
-     ------------------------------------------------------* */
-    menu.state('entry-point-to-referrals-controller', {
-      run() {
-        ReferralsController(req, res);
-      },
-    });
-
-    /** ------------------------------------------------------
-     *  ---------------------------------------
-     *  Medicine search controller
-     * ---------------------------------------
-     ------------------------------------------------------* */
-    menu.state('entry-point-to-medicine-search-controller', {
-      run() {
-        MedicineSearchController(req, res);
-      },
-    });
-
-    /** ------------------------------------------------------
-     *  ---------------------------------------
-     *  Settings controller
-     * ---------------------------------------
-     ------------------------------------------------------* */
-    menu.state('entry-point-to-settings-controller', {
-      run() {
-        SettingsController(req, res);
+        AboutController(req, res);
       },
     });
 
