@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 const { menu } = require('../config/menu-builder');
 
-const AuthenticationController = require('./authentication/authentication.controller');
 const ReportController = require('./report/report.controller');
 const AboutController = require('./about/about.controller');
 
@@ -22,9 +21,8 @@ module.exports = async function AppController(req, res) {
            * ---------------------------------------
           ------------------------------------------------------* */
           menu.con('Welcome to Fichua!\n'
-              + '\n1. Login to report'
-              + '\n2. Report anonymously'
-              + '\n3. About Fichua');
+              + '\n1. Report anonymously'
+              + '\n2. About Fichua');
         } catch (error) {
           console.error(error);
         }
@@ -35,20 +33,8 @@ module.exports = async function AppController(req, res) {
      * ---------------------------------------
      ------------------------------------------------------* */
       next: {
-        1: 'entry-point-to-authentication-controller',
-        2: 'entry-point-to-report-controller',
-        3: 'entry-point-to-about-controller',
-      },
-    });
-
-    /** ------------------------------------------------------
-     *  ---------------------------------------
-     *  Authentication  controller
-     * ---------------------------------------
-     ------------------------------------------------------* */
-    menu.state('entry-point-to-authentication-controller', {
-      run() {
-        AuthenticationController(req, res);
+        1: 'entry-point-to-report-controller',
+        2: 'entry-point-to-about-controller',
       },
     });
 

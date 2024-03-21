@@ -36,11 +36,11 @@ module.exports = async function ManualController(req, res) {
     /** ---------------------------------------------------
      *   ──────┤ Entry ├──────    ***********
      ---------------------------------------------------* */
-    menu.state('entry-point-to-emergency-controller', {
+    menu.state('entry-point-to-report-controller', {
       run: () => {
         clearState();
 
-        menu.con('Please enter your exact location for accurate results');
+        menu.con('What is the location of the emergency?');
       },
       next: {
         '*': 'emergency-controller',
