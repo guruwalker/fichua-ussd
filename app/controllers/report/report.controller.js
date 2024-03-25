@@ -61,6 +61,8 @@ module.exports = async function ManualController(req, res) {
 
     menu.state('final-output', {
       run: async () => {
+        incidentStatement = menu.val;
+
         // try {
         const payload = {
           case_uuid: generateShortUUID(),
